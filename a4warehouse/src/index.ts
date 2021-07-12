@@ -19,8 +19,8 @@ app.post(apiVer + EServices.products,(req,res) => {
     const p:TProduct = req.body
     console.log(apiVer + EServices.products,p)
     try {
-        res.send(addProduct(p))
-    } catch(e) {res.send(e)}
+        res.status(201).send(addProduct(p))
+    } catch(e) {res.status(400).send(e)}
     
 })
 let port: number = parseInt(process.env.PORT || "3000")
