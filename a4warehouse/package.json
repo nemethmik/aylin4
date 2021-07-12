@@ -1,0 +1,38 @@
+{
+  "name": "a4warehouse",
+  "version": "1.0.0",
+  "description": "A backend service providing products, stocks, orders, customers for the a4store shopping cart applications",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node",
+    "bang": "nodemon",
+    "dev4500": "set PORT=4500 && nodemon src/index.ts",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc -p .",
+    "lint": "npx eslint src/",
+    "fix": "npx eslint src/ --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod-loc": "set SVC=http://localhost:4500/api/v10/Products && npm-run-all -s test:*",
+    "prod-azu": "set SVC=https://a4warehouse.azurewebsites.net/api/v10/Products && npm-run-all -s test:*",
+    "prod:10": "curl -X POST -H \"Content-Type: application/json\" -d @testdata/product01.json %SVC%"
+  },
+  "author": "Miklos Nemeth",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^16.3.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
+    "eslint": "^7.30.0",
+    "nodemon": "^2.0.12",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  }
+}
