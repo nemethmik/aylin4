@@ -5,16 +5,17 @@ The project more or less followed the Udemy course [MEAN Stack E-Commerce App: A
 In my version, however, I used TypeScript heavily for the backend development, too. 
 [NodeMon can be used with TS-Node](https://futurestud.io/tutorials/typescript-use-nodemon-to-restart-your-server-on-changes) to run ts files directly. When a server is installed as an Azure App Server, Azure can build the entire application on the server. Check out my series on SOAP services [Developing a SOAP Service with Node TypeScript and Deploying It as Azure App Service (Part 4)](https://www.youtube.com/watch?v=UNEVOctGbsw)
 Here are the main points of setting up a proper TypeScript Express server environment:
-- **npm install typescript nodemon ts-node @types/node @types/express npm-run-all eslint @types/morgan --save-dev** 
+- **npm install typescript nodemon ts-node @types/node @types/express npm-run-all eslint @types/morgan @types/mongoose --save-dev** 
     - typescript is the TS compiler
     - nodemon with ts-node is to start server when a TS file is changed
     - npm-run-all is to perform a series of (test) scripts
     - ESLint for enforcing TS rules and have the option to automatically fix errors, where it is supported.
     - Installing @types/morgan is terribly important, otherwise it cannot be imported.
-- **npm install express dotenv morgan**
+- **npm install express dotenv morgan mongoose**
     - dotenv is for hadling .env files
     - [morgan](https://dev.to/vassalloandrea/better-logs-for-expressjs-using-winston-and-morgan-with-typescript-516n) is for logging incoming requests and it requires @types/morgan, too.
     The [morgan](http://expressjs.com/en/resources/middleware/morgan.html) log can be formatted a number of ways 
+    -mongoose is to access mongo DB
 - run **npx tsc --init** to create tsconfig.json
 - Add source and destination directories to the tsconfig.json  
     ```
@@ -50,3 +51,63 @@ if(isNaN(port) || port <= 0 || port >= 65536) port = 3000
 ```
 The *dotenv* modules supports defining .env file containing environment variables, but when a real environment variable is defined it takes precedence.
 bodyParser.json() as middleware is deprecated, use **app.use(express.json())**
+
+## Connecting to a Mongo DB
+Install mongoose and get a connection string.
+- Login to [cloud.mongodb.com](https://cloud.mongodb.com/) and on the Clusters page find the Connect button, then copy the connection string.
+- On the database panel create a user for the application (a4storeowner).
+- The database is a collection on the clusters panel (a4warehouse)
+- Make sure to add your local IP to the network access otherwise an authorization fault is resulted
+
+The mongoose.connect function returns a promise, so 
+for the sake of fun, I included the database connection part into an async function and the entire server startup function into another async function. This was I managed to program the startup in a way that the Express server starts only after a successfult database connection.
+In a real application this is not ok, since then the server cannot be asked via the web browser interface if the database connection was ok or not. 
+
+MongoDB Compass is really a great simple tool to manage data. 
+[Mongoose schema can be used with TypeScript](https://mongoosejs.com/docs/typescript/schemas.html), but a schema definition is necessary even with TypeScript.
+
+This mongoose has a tricky API, after reviewing the [TypeScript sample](https://mongoosejs.com/docs/typescript.html) in the Mongoose documentation, you can find that the connect function imported from mongoose module seems to connect the database globally, and I was right: 
+"Mongoose creates a default connection when you call mongoose.connect(). You can access the default connection using mongoose.connection."  
+```
+import { Schema, model, connect } from "mongoose"
+
+// 1. Create an interface representing a document in MongoDB.
+interface User {
+  name: string,
+  email: string,
+  avatar?: string,
+}
+
+// 2. Create a Schema corresponding to the document interface.
+const schema = new Schema<User>({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  avatar: String
+})
+
+// 3. Create a Model.
+const UserModel = model<User>("User", schema)
+
+run().catch(err => console.log(err))
+
+async function run(): Promise<void> {
+  // 4. Connect to MongoDB
+  await connect("mongodb://localhost:27017/test", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+
+  const doc = new UserModel({
+    name: "Bill",
+    email: "bill@initech.com",
+    avatar: "https://i.imgur.com/dM7Thhn.png"
+  })
+  await doc.save()
+
+  console.log(doc.email) // bill@initech.com
+}
+``` 
+When you want to use [multiple connections](https://mongoosejs.com/docs/connections.html#multiple_connections) with mongoose you should use
+**createConnection** which returns a connection object and its model member should be used to create models. Schemas are independent of models, since they are only definition objects, but a model is bound to a specific database connection. 
+Instead of using this unintuitove default connection style it is better to explicitly use pass around the connection object to any function performing database operation, which is the norm with every imaginable database system.
+[Mongoose and multiple database in single node.js project](https://stackoverflow.com/questions/19474712/mongoose-and-multiple-database-in-single-node-js-project) is an excellent source fo information.
