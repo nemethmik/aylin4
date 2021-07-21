@@ -5,13 +5,14 @@ The project more or less followed the Udemy course [MEAN Stack E-Commerce App: A
 In my version, however, I used TypeScript heavily for the backend development, too. 
 [NodeMon can be used with TS-Node](https://futurestud.io/tutorials/typescript-use-nodemon-to-restart-your-server-on-changes) to run ts files directly. When a server is installed as an Azure App Server, Azure can build the entire application on the server. Check out my series on SOAP services [Developing a SOAP Service with Node TypeScript and Deploying It as Azure App Service (Part 4)](https://www.youtube.com/watch?v=UNEVOctGbsw)
 Here are the main points of setting up a proper TypeScript Express server environment:
-- **npm install typescript nodemon ts-node @types/node @types/express npm-run-all eslint @types/morgan @types/mongoose @types/cors --save-dev** 
+- **npm init** was used to create package.json
+- **npm install typescript nodemon ts-node @types/node @types/express npm-run-all eslint @types/morgan @types/mongoose @types/cors @types/bcryptjs @types/jsonwebtoken @types/express-jwt  --save-dev** 
     - typescript is the TS compiler
     - nodemon with ts-node is to start server when a TS file is changed
     - npm-run-all is to perform a series of (test) scripts
     - ESLint for enforcing TS rules and have the option to automatically fix errors, where it is supported.
     - Installing @types/morgan is terribly important, otherwise it cannot be imported.
-- **npm install express dotenv morgan mongoose cors**
+- **npm install express dotenv morgan mongoose cors bcryptjs jsonwebtoken express-jwt**
     - dotenv is for hadling .env files
     - [morgan](https://dev.to/vassalloandrea/better-logs-for-expressjs-using-winston-and-morgan-with-typescript-516n) is for logging incoming requests and it requires @types/morgan, too.
     The [morgan](http://expressjs.com/en/resources/middleware/morgan.html) log can be formatted a number of ways 
@@ -46,6 +47,7 @@ It is bad practice to define start NPM command with nodemon, it should be *"star
 - To start development service **npm run dev**
   - You can use *npm start* but only after you have compiled the TypeScript application into the dist folder with *npm run build* This is exactly what Azure does when the application is deployed as an App/Web Service.
 - To run CURL tests, open a new terminal window and set the *SVC* environment variable with *set SVC=http://localhost:4500/api/v10/* and then you can **npm run prod:10**
+- I did a lot of tests with *Postman*, too. For interactive testing APIs it is more convenient than CURL.I have an account and I had to install the Postman local agent to access the *localhost* service.
 
 ## Starting an Express Server
 
@@ -127,7 +129,7 @@ I used to have bad memories with the hilarious limitations of Mondo DB and all o
 This course just reassured that no way I'd use such a system for a complex application vs a real SQL database.
 On the other hand, for not too complex applications written in TypeScript where you regard the data as just a persistable collections it's quite ok.
 
-In lesson 32 Show Category Details in the Product *populate* mongoose function is used. Lesson 37 nicely explain how to query products by categories. Lesson 38 explains how to use virtuals in mongoose schema definitions.
+In lesson 32 Show Category Details in the Product *populate* mongoose function is used. Lesson 37 nicely explain how to query products by categories. Lesson 38 explains how to use virtuals in mongoose schema definitions. Kessons 40 - 46 show a quite decent user management machinery using bcrypt.
 
 ## Source Code Structure
 Since this is a small application, I stay away from subfolders. Each business objects has its own file, schema, business functions and models. Schemas and models are never exported from the modules ony the business functions and the TypeScript type/interface definitions. 
@@ -135,3 +137,6 @@ I didn't use Express routers, since it gives almost no real functionality.
 
 [CORS](https://expressjs.com/en/resources/middleware/cors.html)  has a number of configuration option, and even [TypeScript examples](https://www.twilio.com/blog/add-cors-support-express-typescript-api) are available.
 
+## JSON Web Tokens for Authentication
+The contents of a token can be decoded at [jwt.io by Auth0](https://jwt.io/) 
+Lesson 51 explains vaguely how to use the *isRevoked* express-jwt feature.

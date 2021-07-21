@@ -12,8 +12,8 @@
     "lint": "npx eslint src/",
     "fix": "npx eslint src/ --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prod-loc": "set SVC=http://localhost:4500/api/v10/ && npm-run-all -s test:*",
-    "prod-azu": "set SVC=https://a4warehouse.azurewebsites.net/api/v10/ && npm-run-all -s test:*",
+    "prod-loc": "set SVC=http://localhost:4500/a4wh/ && npm-run-all -s test:*",
+    "prod-azu": "set SVC=https://a4warehouse.azurewebsites.net/a4wh/ && npm-run-all -s test:*",
     "pcat:10": "curl -i -X POST -H \"Content-Type: application/json\" -d @testdata/pcategory01.json %SVC%ProdCategs",
     "prod:10": "curl -X POST -H \"Content-Type: application/json\" -d @testdata/product01.json %SVC%Products",
     "pcat:d": "curl -i -X DELETE -H \"Content-Type: application/json\" %SVC%ProdCategs/60f7d06fdd8c8e0e30bf4168"
@@ -21,8 +21,11 @@
   "author": "Miklos Nemeth",
   "license": "MIT",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/express-jwt": "^6.0.2",
+    "@types/jsonwebtoken": "^8.5.4",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.3.1",
@@ -35,9 +38,12 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.2",
     "morgan": "^1.10.0"
   }
