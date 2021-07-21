@@ -4,7 +4,7 @@
   "description": "A backend service providing products, stocks, orders, customers for the a4store shopping cart applications",
   "main": "dist/index.js",
   "scripts": {
-    "start": "node",
+    "start": "node .",
     "bang": "nodemon",
     "dev4500": "set PORT=4500 && nodemon src/index.ts",
     "dev": "nodemon src/index.ts",
@@ -12,13 +12,16 @@
     "lint": "npx eslint src/",
     "fix": "npx eslint src/ --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prod-loc": "set SVC=http://localhost:4500/api/v10/Products && npm-run-all -s test:*",
-    "prod-azu": "set SVC=https://a4warehouse.azurewebsites.net/api/v10/Products && npm-run-all -s test:*",
-    "prod:10": "curl -X POST -H \"Content-Type: application/json\" -d @testdata/product01.json %SVC%"
+    "prod-loc": "set SVC=http://localhost:4500/api/v10/ && npm-run-all -s test:*",
+    "prod-azu": "set SVC=https://a4warehouse.azurewebsites.net/api/v10/ && npm-run-all -s test:*",
+    "pcat:10": "curl -i -X POST -H \"Content-Type: application/json\" -d @testdata/pcategory01.json %SVC%ProdCategs",
+    "prod:10": "curl -X POST -H \"Content-Type: application/json\" -d @testdata/product01.json %SVC%Products",
+    "pcat:d": "curl -i -X DELETE -H \"Content-Type: application/json\" %SVC%ProdCategs/60f7d06fdd8c8e0e30bf4168"
   },
   "author": "Miklos Nemeth",
   "license": "MIT",
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.3",
@@ -32,6 +35,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.13.2",
