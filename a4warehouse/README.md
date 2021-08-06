@@ -140,3 +140,7 @@ I didn't use Express routers, since it gives almost no real functionality.
 ## JSON Web Tokens for Authentication
 The contents of a token can be decoded at [jwt.io by Auth0](https://jwt.io/) 
 Lesson 51 explains vaguely how to use the *isRevoked* express-jwt feature.
+JWT is an enormously big topic way beyond the scope of such a tutorial application. Simple basic authentication would have been enough, unless the storefront is not extended with OAuth, that is where the authentication is done by a thirt party: Auth0, Google, Microsoft, Facebook.
+
+## File Uploading
+Section 7 explains how to use [Multer](https://expressjs.com/en/resources/middleware/multer.html) for file uploads. Multer is written on top of busboy, which I used in my [Brankica project](https://github.com/nemethmik/brankica)

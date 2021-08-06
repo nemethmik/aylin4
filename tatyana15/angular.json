@@ -1,0 +1,274 @@
+{
+  "version": 1,
+  "projects": {
+    "t15shop": {
+      "projectType": "application",
+      "root": "apps/t15shop",
+      "sourceRoot": "apps/t15shop/src",
+      "prefix": "tatyana15",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/t15shop",
+            "index": "apps/t15shop/src/index.html",
+            "main": "apps/t15shop/src/main.ts",
+            "polyfills": "apps/t15shop/src/polyfills.ts",
+            "tsConfig": "apps/t15shop/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/t15shop/src/favicon.ico",
+              "apps/t15shop/src/assets"
+            ],
+            "styles": ["apps/t15shop/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/t15shop/src/environments/environment.ts",
+                  "with": "apps/t15shop/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "t15shop:build:production"
+            },
+            "development": {
+              "browserTarget": "t15shop:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "t15shop:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/t15shop/src/**/*.ts",
+              "apps/t15shop/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/t15shop"],
+          "options": {
+            "jestConfig": "apps/t15shop/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "t15shop-e2e": {
+      "root": "apps/t15shop-e2e",
+      "sourceRoot": "apps/t15shop-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/t15shop-e2e/cypress.json",
+            "tsConfig": "apps/t15shop-e2e/tsconfig.e2e.json",
+            "devServerTarget": "t15shop:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "t15shop:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/t15shop-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "t15storeadmin": {
+      "projectType": "application",
+      "root": "apps/t15storeadmin",
+      "sourceRoot": "apps/t15storeadmin/src",
+      "prefix": "tatyana15",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/t15storeadmin",
+            "index": "apps/t15storeadmin/src/index.html",
+            "main": "apps/t15storeadmin/src/main.ts",
+            "polyfills": "apps/t15storeadmin/src/polyfills.ts",
+            "tsConfig": "apps/t15storeadmin/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/t15storeadmin/src/favicon.ico",
+              "apps/t15storeadmin/src/assets"
+            ],
+            "styles": ["apps/t15storeadmin/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/t15storeadmin/src/environments/environment.ts",
+                  "with": "apps/t15storeadmin/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "t15storeadmin:build:production"
+            },
+            "development": {
+              "browserTarget": "t15storeadmin:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "t15storeadmin:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/t15storeadmin/src/**/*.ts",
+              "apps/t15storeadmin/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/t15storeadmin"],
+          "options": {
+            "jestConfig": "apps/t15storeadmin/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "t15storeadmin-e2e": {
+      "root": "apps/t15storeadmin-e2e",
+      "sourceRoot": "apps/t15storeadmin-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/t15storeadmin-e2e/cypress.json",
+            "tsConfig": "apps/t15storeadmin-e2e/tsconfig.e2e.json",
+            "devServerTarget": "t15storeadmin:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "t15storeadmin:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/t15storeadmin-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "t15shop"
+}
