@@ -26,6 +26,7 @@ NX supports plain [NodeJS](https://nx.dev/node) applications, too, so, the a4war
 
 I used **npm run nx generate @nrwl/angular:app t15storeadmin** to create the store admin Angular application. When asked I picked using routing
 
+When you work with NX it seems that it is not relying on a globally installed NX package.
 
 ## About NX
 
