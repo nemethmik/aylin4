@@ -1,7 +1,12 @@
 
 
 # Tatyana15
-The workspace was named after the excellent Russian volleyball player Tatyana Kosheleva, who used to have number 15. Unfortunately, Tatyana didn't participate in the Tokyo 2021 Olympics.
+The workspace was named after the excellent Russian volleyball player [Tatyana Kosheleva](https://youtu.be/RWNYCKrOX-g), who used to have number 15. 
+
+**The project was put on hold** since I didn't like at all the way the instructor built this application. In the meantime, I learned Angular and I love it absolutely.
+At first NX seemed to be loved, but eventually it just gives another layer of complexity,
+a solution for a non-existent problem, honestly.
+---
 
 ## Project Setup
 After I created the workspace with **npx create-nx-workspace --preset=angular** which I got from [NX Setup](https://nx.dev/latest/angular/getting-started/nx-setup). This tool interactively asks for the workspace name (tatyana15) and the name of the 1st application (t15shop), stylesheet format (SASS) and linting format (ESLint).

@@ -1,5 +1,9 @@
 # Aylin 4 Warehouse - a Backend Server for the Aylin 4 Store Front Shopping cart Application
 
+**The project was put on hold** since I have zero interest in experimenting with Mongo DB any more. For detailed explanation see the rest of the readme and watch my videos.
+
+---
+
 The project more or less followed the Udemy course [MEAN Stack E-Commerce App: Angular 12, NX, PrimeNg [2021]](https://www.udemy.com/course/mean-stack-ecommerce-app-angular-nx-primeng/)
 
 In my version, however, I used TypeScript heavily for the backend development, too. 

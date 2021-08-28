@@ -1,0 +1,24 @@
+{
+  "name": "bro11",
+  "version": "1.0.0",
+  "description": "A Bootstrap UI for mobile work reporting.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "nemethmik/aylin4/bro11"
+  },
+  "keywords": [
+    "Typescript",
+    "Bootstrap",
+    "Parcel"
+  ],
+  "author": "Miklos Nemeth",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.0.0-rc.0",
+    "typescript": "^4.4.2"
+  }
+}

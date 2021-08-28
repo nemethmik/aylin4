@@ -1,4 +1,9 @@
 # Net Ninja Webpack Typescript Tutorial
+
+**Project put on hold** since I found the series outdated inconsistent, actually a disappointment Net Ninja used to be a decent instructor.
+
+---
+
 ## Motivation
 The motivation to learn this topic is that I'm collecting knowledge to elaborate a no-framework web development stack of ttols
 like Bootstrap, TypeScript, PWA, (in-browser) Local Storage, fetch/Axios, w3-iclude-html with inspirational videos like:
